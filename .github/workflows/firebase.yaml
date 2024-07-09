@@ -13,11 +13,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up Google Cloud credentials
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+
       - name: Install Firebase Tools
         run: npm install -g firebase-tools
 
-      - name: Firebase Login
-        run: firebase login:ci --token "$GOOGLE_APPLICATION_CREDENTIALS "
+      - name: Enable Firebase Web Frameworks Experiment
+        run: firebase experiments:enable webframeworks
 
       - name: Deploy to Firebase
         run: firebase deploy --only hosting
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
