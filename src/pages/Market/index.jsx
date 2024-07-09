@@ -49,34 +49,36 @@ const Market = () => {
     };
 
     return (
-        <div className="flex flex-col flex-grow text-2xl sm:text-4xl items-center gap-8 mb-4 px-4 pb-4">
-            <h1 className="mt-4 font-bold h-full w-fit">Explora las Criptomonedas</h1>
-            <img
-                src="/gift_svgrepo.com.svg"
-                alt="coin"
-                className="spect-square h-fit w-8 md:w-16 absolute right-8 cursor-pointer"
-            />
-            <CryptoSearch />
-            <div className="text-base w-full flex-grow flex  flex-row flex-wrap p-4 justify-between">
-                {loading ? (
-                    <Loading text="Cargando datos..." />
-                ) : (
-                    <>
-                        <div className="w-2/3">
-                            <MarketPrices
-                                cryptoData={cryptoData}
-                                currentCategory={currentCategory}
-                                handleClick={handleClick}
-                                handleListClick={handleListClick}
-                            />
-                        </div>
-                        <div className="w-1/3">
-                            <MarketSummary cryptoData={cryptoData} handleListClick={handleListClick} />
-                        </div>
-                    </>
-                )}
+            <div className="flex flex-col flex-grow text-2xl sm:text-4xl items-center gap-8 mb-4 px-4 pb-4">
+                <div className="flex justify-center items-center w-full mt-4"> {/* Contenedor ajustado para flex */}
+                    <h1 className="font-bold">Explora las Criptomonedas</h1>
+                    <img
+                        src="/gift_svgrepo.com.svg"
+                        alt="coin"
+                        className="h-fit w-8 md:w-16 ml-4 cursor-pointer" // Ajustado para eliminar posición absoluta y agregar margen
+                    />
+                </div>
+                <CryptoSearch />
+                <div className="text-base w-full flex-grow flex flex-col sm:flex-row flex-wrap p-4 justify-between">
+                    {loading ? (
+                        <Loading text="Cargando datos..." />
+                    ) : (
+                        <>
+                            <div className="w-full sm:w-2/3">
+                                <MarketPrices
+                                    cryptoData={cryptoData}
+                                    currentCategory={currentCategory}
+                                    handleClick={handleClick}
+                                    handleListClick={handleListClick}
+                                />
+                            </div>
+                            <div className="w-full sm:w-1/3">
+                                <MarketSummary cryptoData={cryptoData} handleListClick={handleListClick} />
+                            </div>
+                        </>
+                    )}
+                </div>
             </div>
-        </div>
     );
 };
 
