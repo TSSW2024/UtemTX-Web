@@ -1,30 +1,19 @@
-name: Deploy to Firebase Hosting
-
+name: Automatic Hosting to Firebase
 on:
   push:
     branches:
-      - main  # o la rama que deseas desplegar
+      - main
 
 jobs:
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-
-      - name: Install Firebase Tools
-        run: npm install -g firebase-tools
-
-      - name: Enable Firebase Experiments
-        run: firebase experiments:enable webframeworks
-
-      - name: Set up Google Cloud credentials
-        uses: google-github-actions/setup-gcloud@master
-        with:
-          service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-
+      - name: Checkout Repo
+        uses: actions/checkout@master
       - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-        run: firebase deploy --only hosting
+          FIREBASE_TOKEN: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
