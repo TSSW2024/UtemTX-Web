@@ -23,9 +23,9 @@ jobs:
       - name: Build
         run: npm run build  # ajusta el comando según tu configuración de construcción
 
-      - name: Deploy to Firebase
-        run: |
-          npm install -g firebase-tools
-          firebase deploy --token "$FIREBASE_SERVICE_ACCOUNT_TSS_1S2024"
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TSS_1S2024}}
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TSS_1S2024 }}
+          channelId: live
+          projectId: tss-1s2024
