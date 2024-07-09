@@ -1,0 +1,23 @@
+name: Deploy to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main  # o la rama que deseas desplegar
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Firebase Tools
+        run: npm install -g firebase-tools
+
+      - name: Firebase Login
+        run: firebase login:ci --token "$FIREBASE_TOKEN"
+
+      - name: Deploy to Firebase
+        run: firebase deploy --only hosting
