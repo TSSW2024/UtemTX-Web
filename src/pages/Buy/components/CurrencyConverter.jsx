@@ -59,6 +59,44 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
         }
     };
 
+    const webPay = async (monto) => {
+        const apiUrl = 'https://backend-webpay.tssw.cl/save-transaction'; // Asegúrate de que la URL es correcta
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    monto: parseFloat(monto),
+                }),
+            });
+
+            const responseText = await response.text();
+            console.log('Respuesta de la API:', responseText);
+
+            // Intenta analizar la respuesta como JSON
+            let data;
+            try {
+                data = JSON.parse(responseText);
+            } catch (parseError) {
+                console.error('Error al analizar la respuesta de la API como JSON:', parseError);
+                throw new Error('Respuesta de la API no es un JSON válido');
+            }
+
+            if (!response.ok) {
+                console.error('Error en la respuesta de la API:', data);
+                throw new Error(`Error: ${data.message || response.statusText}`);
+            }
+
+            console.log('Resultado de WebPay:', data);
+            // Aquí podrías manejar el resultado de la conversión
+        } catch (error) {
+            console.error('Error en WebPay:', error);
+        }
+    };
+
     const tooltipContent = () => {
         if (convertedAmount === '' || amount === '') return;
 
@@ -76,18 +114,24 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
         );
     };
 
-    const handleAmountChange = (e) => {
+    const handleAmountChange = async (e) => {
         const inputVal = e.target.value;
         if (/^\d*\.?\d{0,8}$/.test(inputVal)) {
             setAmount(inputVal);
             // Llamar a convertCurrency() cada vez que el usuario ingrese un nuevo número
-            convertCurrency();
+            await convertCurrency();
         }
     };
 
-    const handleClick = () => {
+    const handleClick = async () => {
         if (isLogged) {
-            alert(`¡${mode === 'buy' ? 'Compra' : 'Venta'} exitosa!`);
+            try {
+                await webPay(amount);
+                alert(`¡${mode === 'buy' ? 'Compra' : 'Venta'} exitosa!`);
+            } catch (error) {
+                console.error('Error en WebPay:', error);
+                alert('Hubo un problema con la transacción. Inténtalo de nuevo.');
+            }
         } else {
             navigate('/login');
         }
