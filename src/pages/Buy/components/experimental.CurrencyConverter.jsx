@@ -46,7 +46,17 @@ const CurrencyConverter = ({ mode }) => {
         if (!amount || !fromCurrency || !toCurrency) return;
 
         try {
-            const response = await fetch(`/api/conversion?amount=${amount}&fromCurrency=${fromCurrency}&toCurrency=${toCurrency}`);
+            const response = await fetch('https://api-convertir.tssw.cl/convert', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    amount,
+                    from: fromCurrency,
+                    to: toCurrency,
+                }),
+            });
             if (!response.ok) {
                 throw new Error('Error al convertir moneda');
             }

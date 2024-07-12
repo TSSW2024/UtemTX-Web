@@ -2,30 +2,21 @@ import React, { useState, useEffect } from 'react';
 import DropdownSearch from '@components/DropdownSearch';
 import criptosMockup from '@mockups/criptos';
 import { Tooltip } from 'react-tooltip';
-import { stringToPrice } from '@utils/helpers';
 import { useNavigate } from 'react-router-dom';
 
 const CurrencyConverter = ({ mode, isLogged = false }) => {
     const navigate = useNavigate();
     const { criptos, divisas } = criptosMockup;
 
-    // Filtramos las opciones de "De" y "A" según el modo
     const fromOptions = mode === 'buy' ? divisas : criptos;
     const toOptions = mode === 'buy' ? criptos : divisas;
 
     const [fromCurrency, setFromCurrency] = useState(fromOptions[0].symbol);
     const [toCurrency, setToCurrency] = useState(toOptions[0].symbol);
-    const [tasa, setTasa] = useState('0'); // Tasa de cambio entre las monedas seleccionadas
     const [amount, setAmount] = useState('');
-    const [neto, setNeto] = useState('');
     const [convertedAmount, setConvertedAmount] = useState('');
     const [inputFocused, setInputFocused] = useState(false);
-    const [comision, setComision] = useState({
-        origen: '0',
-        destino: '0'
-    });
 
-    // Reiniciar monedas cuando cambia el modo
     useEffect(() => {
         setFromCurrency(fromOptions[0].symbol);
         setToCurrency(toOptions[0].symbol);
@@ -37,61 +28,60 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
         }
     }, [amount, fromCurrency, toCurrency]);
 
-    const convertCurrency = () => {
+    const convertCurrency = async () => {
         if (!amount) return;
 
-        const fromRate = fromOptions.find(option => option.symbol === fromCurrency).exchangeRate;
-        const toRate = toOptions.find(option => option.symbol === toCurrency).exchangeRate;
-        const taxes = 1;
-        const comision_origen = (taxes / fromRate);
-        const comision_destino = (taxes / toRate)
-        console.log(comision_origen, comision_destino)
-        const result = (amount * fromRate) / toRate;
-        // Tasa es el valor de 1 unidad de la moneda de origen en la moneda de destino
-        setTasa((fromRate / toRate).toFixed(8).slice(0, 16));
-        setComision({
-            origen: comision_origen.toFixed(8).slice(0, 16),
-            destino: comision_destino.toFixed(8).slice(0, 16)
-        });
-        const real = (result)
-        const convertedAmount = (real - comision_destino).toFixed(16).slice(0, 16);
-        setConvertedAmount(convertedAmount);
-        setNeto(real.toFixed(16).slice(0, 16));
+        const apiUrl = 'https://api-convertir.tssw.cl/convert';
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    amount: amount,
+                    from: fromCurrency,
+                    to: toCurrency,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorResponse = await response.json();
+                console.error('Error en la respuesta de la API:', errorResponse);
+                throw new Error(`Error: ${errorResponse.message || response.statusText}`);
+            }
+
+            const data = await response.json();
+            setConvertedAmount(data.result.toFixed(8).slice(0, 16));
+        } catch (error) {
+            console.error('Error al obtener la conversión:', error);
+        }
     };
 
-    // Contenido dinámico para el tooltip
     const tooltipContent = () => {
-        if (convertedAmount === '' || amount === '' || tasa === '' || comision.origen === '' || comision.destino === '')
-            return;
+        if (convertedAmount === '' || amount === '') return;
 
         return (
             <div className='dark:text-gray-300 text-gray-700 text-lg'>
                 <div className="flex flex-grow justify-between">
-                    <span className="font-bold">Precio:</span>
-                    <span className="ml-2">1 {fromCurrency} ≈ {(tasa)} {toCurrency}</span>
-                </div>
-                <div className="flex flex-grow justify-between gap-8">
                     <span className="font-bold">Gastar:</span>
-                    <span className="ml-2">{stringToPrice(amount, true)} {fromCurrency} ≈ {stringToPrice(neto, true)} {toCurrency}</span>
-                </div>
-                <div className="flex flex-grow justify-between gap-8">
-                    <span className="font-bold">Comisión:</span>
-                    <span className="ml-2">{stringToPrice(comision.origen, true)} {fromCurrency} ≈ {stringToPrice(comision.destino, true)} {toCurrency}</span>
+                    <span className="ml-2">{amount} {fromCurrency}</span>
                 </div>
                 <div className="flex flex-grow justify-between gap-8">
                     <span className="font-bold">Recibir:</span>
-                    <span className="ml-2">{stringToPrice(convertedAmount, true)} {toCurrency}</span>
+                    <span className="ml-2">{convertedAmount} {toCurrency}</span>
                 </div>
             </div>
-        )
-    }
+        );
+    };
 
-    // Función para manejar el cambio en el input de monto
     const handleAmountChange = (e) => {
         const inputVal = e.target.value;
-        // Validar que solo contenga dígitos y un punto como separador decimal y hasta 8 decimales
         if (/^\d*\.?\d{0,8}$/.test(inputVal)) {
             setAmount(inputVal);
+            // Llamar a convertCurrency() cada vez que el usuario ingrese un nuevo número
+            convertCurrency();
         }
     };
 
@@ -124,7 +114,7 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
                     onSelect={(option) => setFromCurrency(option)}
                 />
             </div>
-            <div className="mb-4 relative  flex flex-row items-center gap-4 border border-gray-300 dark:border-gray-700 p-4 rounded-2xl">
+            <div className="mb-4 relative flex flex-row items-center gap-4 border border-gray-300 dark:border-gray-700 p-4 rounded-2xl">
                 <label className="absolute top-0 left-0 -mt-2 ml-2 bg-zinc-200 dark:bg-gray-800 px-2 text-xs text-gray-700 dark:text-gray-300 ">
                     Recibir
                     <i className='fa fa-info-circle text-gray-400 dark:text-gray-500 ml-2 my-anchor-element '> </i>
@@ -139,7 +129,7 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
                 <input
                     type="text"
                     className="mt-2 w-full px-4 py-2 border-none rounded-lg text-2xl font-bold"
-                    value={amount.length === 0 ? '' : convertedAmount[0] === '-' ? '0.0' : stringToPrice(convertedAmount, true)}
+                    value={amount.length === 0 ? '' : convertedAmount.toString()}
                     readOnly
                     placeholder="0.0"
                 />
