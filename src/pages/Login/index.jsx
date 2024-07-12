@@ -107,7 +107,7 @@ const Login = () => {
                         ></i>
                     </div>
 
-                    <button type="submit" className="bg-orange-500 dark:bg-primary hover:opacity-75 text-black rounded-lg p-2 font-bold">Iniciar sesión</button>
+                    <button type="submit" className="bg-orange-500 dark:bg-primary-light hover:opacity-75 text-black rounded-lg p-2 font-bold">Iniciar sesión</button>
                     <div className="flex items-center my-4">
                         <div className="flex-grow border-t border-gray-300"></div>
                         <span className="mx-4 text-gray-500">o</span>

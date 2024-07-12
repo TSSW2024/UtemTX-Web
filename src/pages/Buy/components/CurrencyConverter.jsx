@@ -151,7 +151,7 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
                 />
             </div>
             <button
-                className="bg-orange-500 dark:bg-primary dark:text-secondary rounded-xl px-4 py-2 font-semibold hover:bg-orange-600 dark:hover:bg-primary-dark"
+                className="bg-primary dark:bg-primary-dark dark:text-secondary rounded-xl px-4 py-2 font-semibold hover:bg-primary-lighthover dark:hover:bg-primary-dark"
                 onClick={handleClick}
             >
                 {

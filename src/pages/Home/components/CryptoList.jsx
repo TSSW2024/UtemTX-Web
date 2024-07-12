@@ -117,7 +117,7 @@ const CryptoList = () => {
     };
 
     return (
-        <div className="w-96 max-h-96  bg-light dark:bg-secondary m-8 p-5 rounded-3xl shadow-lg drop-shadow-lg">
+        <div className="w-96 max-h-96  bg-primary-light dark:bg-secondary m-8 p-5 rounded-3xl shadow-lg drop-shadow-lg">
             {loading ? <Loading /> : error ? <ErrorContent /> : <Render />}
         </div>
     );

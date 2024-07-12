@@ -178,7 +178,7 @@ const Register = () => {
                     </div>
                     <button
                         type="submit"
-                        className="bg-primary hover:opacity-75 text-black rounded-lg p-2 font-bold disabled:bg-disabled disabled:cursor-not-allowed"
+                        className={`bg-primary hover:opacity-75 text-black rounded-lg p-2 font-bold disabled:bg-disabled disabled:cursor-not-allowed ${!isSubmitDisabled ? 'dark:bg-primary-dark' : ''}`}
                         disabled={isSubmitDisabled}
                     >
                         Siguiente
