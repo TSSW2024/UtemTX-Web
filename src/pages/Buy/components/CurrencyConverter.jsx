@@ -91,6 +91,7 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
             }
 
             console.log('Resultado de WebPay:', data);
+            window.location.href=data.url;
             // Aquí podrías manejar el resultado de la conversión
         } catch (error) {
             console.error('Error en WebPay:', error);
