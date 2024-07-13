@@ -3,10 +3,12 @@ import DropdownSearch from '@components/DropdownSearch';
 import criptosMockup from '@mockups/criptos';
 import { Tooltip } from 'react-tooltip';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthProvider';
 
 const CurrencyConverter = ({ mode, isLogged = false }) => {
     const navigate = useNavigate();
     const { criptos, divisas } = criptosMockup;
+    const { user } = useAuth();
 
     const fromOptions = mode === 'buy' ? divisas : criptos;
     const toOptions = mode === 'buy' ? criptos : divisas;
@@ -62,15 +64,27 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
     const webPay = async (monto) => {
         const apiUrl = 'https://backend-webpay.tssw.cl/save-transaction'; // Asegúrate de que la URL es correcta
 
+        if (!user) {
+            console.error('Usuario no autenticado');
+            return;
+        }
+
+        const payload = {
+            orden_id: '123456', // Aquí deberías enviar un ID único para la orden
+            session_id: user.uid, // Aquí deberías enviar el ID de la sesión del usuario
+            monto: parseFloat(monto),
+            url_retorno: "https://backend-webpay.tssw.cl/commit", // URL de retorno
+        };
+
+        console.log('Datos enviados a WebPay:', payload);
+
         try {
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    monto: parseFloat(monto),
-                }),
+                body: JSON.stringify(payload),
             });
 
             const responseText = await response.text();
@@ -91,13 +105,12 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
             }
 
             console.log('Resultado de WebPay:', data);
-            window.location.href='https://backend-webpay.tssw.cl/';
+            window.location.href = 'https://backend-webpay.tssw.cl/';
             // Aquí podrías manejar el resultado de la conversión
         } catch (error) {
             console.error('Error en WebPay:', error);
         }
     };
-
     const tooltipContent = () => {
         if (convertedAmount === '' || amount === '') return;
 
