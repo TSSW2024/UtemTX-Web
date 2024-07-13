@@ -91,7 +91,7 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
             }
 
             console.log('Resultado de WebPay:', data);
-            window.location.href=data.url;
+            window.location.href='https://backend-webpay.tssw.cl/';
             // Aquí podrías manejar el resultado de la conversión
         } catch (error) {
             console.error('Error en WebPay:', error);
