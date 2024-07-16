@@ -34,8 +34,9 @@ input[type="checkbox"]#terms+span:before {
 }
 
 input[type="checkbox"]#terms:checked+span:before {
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
+    border: 2px solid #ccc;
+    background-color: gray;
+    border-color: gray;
 }
 
 input[type="checkbox"]#terms:checked+span:after {

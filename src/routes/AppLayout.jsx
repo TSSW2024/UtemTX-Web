@@ -48,7 +48,7 @@ const AppLayout = () => {
 
     return (
         <div className={`flex-grow min-h-screen flex flex-col ${theme === 'dark' ? 'bg-dark text-white' : 'bg-light-dark text-black'} `}>
-            <nav className="dark:bg-secondary bg-gray-300 p-4 flex flex-wrap  items-center gap-8 justify-between">
+<nav className="bg-secondary p-4 flex flex-wrap items-center gap-8 justify-between">
                 {/* Wrapper del logo y los links  */}
                 <div className="flex-col md:flex-row md:flex gap-md items-center w-full md:w-auto">
                     {/* Logo de UtemTX */}
@@ -68,14 +68,14 @@ const AppLayout = () => {
                     <ul className={` w-full flex gap-2 ${isMenuOpen ? ' flex-col mb-8' : 'flex-col md:flex-row'}`}>
                         <li>
                             <Link to="/buy"
-                                className="px-2 py-1  rounded-lg font-bold hover:text-primary-light dark:hover:text-primary block md:inline-block bg-zinc-200 dark:bg-gray-800 dark:text-gray-200"
+                                className="px-2 py-1  rounded-lg font-bold hover:bg-primary-lighthover dark:hover:text-primary block md:inline-block bg-primary dark:bg-gray-800 dark:text-gray-200"
                             >
                                 Comprar Cripto
                             </Link>
                         </li>
                         <li>
                             <Link to="/market"
-                                className="px-2 py-1  rounded-lg font-bold hover:text-primary-light dark:hover:text-primary block md:inline-block bg-zinc-200 dark:bg-gray-800 dark:text-gray-200"
+                                className="px-2 py-1  rounded-lg font-bold hover:bg-primary-lighthover dark:hover:text-primary block md:inline-block bg-primary dark:bg-gray-800 dark:text-gray-200"
                             >Mercados</Link>
                         </li>
                     </ul>
@@ -86,14 +86,14 @@ const AppLayout = () => {
                             <div className="w-full flex gap-2 items-center">
                                 <Link
                                     to="/login"
-                                    className={`${isMobile ? 'w-full' : 'w-auto'} flex flex-row gap-2 items-center rounded text-left px-2 py-1 font-bold bg-primary-light hover:bg-primary-lighthover dark:hover:opacity-75 dark:bg-primary dark:bg-primary-lighthover dark:text-gray-900`}
+                                    className="px-2 py-1 rounded-lg font-bold hover:bg-primary-lighthover dark:hover:text-primary block md:inline-block bg-primary dark:bg-gray-800 dark:text-gray-200"
                                 >
                                     <i className="fas fa-sign-in-alt"></i>
                                     <span className="inline-block">Login</span>
                                 </Link>
                                 <Link
                                     to="/register"
-                                    className={`${isMobile ? 'w-full' : 'w-auto'} flex flex-row gap-2 items-center rounded text-left px-2 py-1 font-bold bg-secondary-light hover:bg-secondary-lighthover dark:hover:opacity-75 dark:bg-secondary dark:bg-secondary-lighthover dark:text-gray-900`}
+                                    className="px-2 py-1 rounded-lg font-bold hover:bg-primary-lighthover dark:hover:text-primary block md:inline-block bg-primary dark:bg-gray-800 dark:text-gray-200"
                                 >
                                     <i className="fas fa-user-plus"></i>
                                     <span className="inline-block">Registrarse</span>
@@ -103,7 +103,7 @@ const AppLayout = () => {
                             <div className="w-full flex gap-2 items-center">
                                 <Link
                                     to="/profile"
-                                    className={`${isMobile ? 'w-full' : 'w-auto'} flex flex-row gap-2 items-center rounded text-left px-2 py-1 font-bold bg-primary-light hover:bg-primary-lighthover dark:hover:opacity-75 dark:bg-primary dark:bg-primary-lighthover dark:text-gray-900`}
+                                    className={`${isMobile ? 'w-full' : 'w-auto'} flex flex-row gap-2 items-center rounded text-left px-2 py-1 font-bold bg-primary hover:bg-primary-lighthover dark:hover:opacity-75 dark:bg-primary dark:bg-primary-lighthover dark:text-gray-900`}
                                 >
                                     < i className="fas fa-user" > </i>
                                     <span className="inline-block">Perfil</span>
@@ -119,20 +119,20 @@ const AppLayout = () => {
                         }
                         <div className="flex gap-2">
                             <button onClick={handleClick}
-                                className={`text-left px-2 py-1 bg-zinc-200 dark:bg-gray-800 dark:text-gray-200 rounded-lg font-bold hover:text-primary-light dark:hover:text-primary ${isMenuOpen ? 'mt-8' : ''}`}
+                                className={`text-left px-2 py-1 bg-primary dark:bg-gray-800 dark:text-gray-200 rounded-lg font-bold hover:text-primary-light dark:hover:text-primary-light ${isMenuOpen ? 'mt-8' : ''}`}
                             >
                                 <span className={`lg:hidden {isMenuOpen ? 'hidden' : 'block'}`}>
                                     Cambiar tema
                                 </span>
-                                <i className={`mx-2 px-2 py-1 bg-zinc-300 dark:bg-gray-800 dark:text-gray-200 rounded-lg fas ${iconClass} text-xl w-8`}></i>
+                                <i className={`mx-2 px-2 py-1 bg-primary-light0 dark:bg-gray-800 dark:text-gray-200 rounded-lg fas ${iconClass} text-xl w-8`}></i>
                             </button>
                             <button onClick={() => console.log('click')}
-                                className={`text-left px-2 py-1 bg-zinc-200 dark:bg-gray-800 dark:text-gray-200 rounded-lg font-bold hover:text-primary-light dark:hover:text-primary ${isMenuOpen ? '' : ''}`}
+                                className={`text-left px-2 py-1 bg-primary dark:bg-gray-800 dark:text-gray-200 rounded-lg font-bold hover:text-primary-light dark:hover:text-primary-light ${isMenuOpen ? '' : ''}`}
                             >
                                 <span className={`lg:hidden {isMenuOpen ? 'hidden' : 'block'}`}>
                                     Descargar App
                                 </span>
-                                <i className="mx-2 px-2 py-1 bg-zinc-300 dark:bg-gray-800 dark:text-gray-200 rounded-lg fas fa-file-arrow-down text-xl w-8"></i>
+                                <i className="mx-2 px-2 py-1 bg-primary dark:bg-gray-800 dark:text-gray-200 rounded-lg fas fa-file-arrow-down text-xl w-8"></i>
                             </button>
                         </div>
                     </div>

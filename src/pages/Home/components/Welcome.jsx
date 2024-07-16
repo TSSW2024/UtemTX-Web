@@ -8,7 +8,7 @@ const Welcome = () => {
                 <input
                     type="email" placeholder="Ingresa tu correo electrónico"
                     className="w-full sm:w-auto flex-grow p-2 rounded-lg border border-gray-400 dark:border-gray-600 active:outline-none focus:outline-none bg-transparent" />
-                <button className="bg-primary-light dark:bg-primary text-black p-2 rounded-lg font-bold ml-2">Continuar</button>
+                <button className="bg-orange-600 dark:bg-primary-dark text-black p-2 rounded-lg font-bold ml-2">Continuar</button>
             </div>
             <div className="flex flex-col sm:flex-row items-center mt-8 md:mt-[12rem] gap-8 cursor-default">
                 <div className="flex flex-row items-center justify-between w-full sm:w-auto">
@@ -17,11 +17,11 @@ const Welcome = () => {
                             O <span className='text-primary-light dark:text-primary'> regístrate con </span>
                         </span>
                         <div className="flex gap-2 mt-2">
-                            <button className="bg-light dark:bg-secondary text-black p-2 rounded-lg font-bold border border-gray-300 dark:border-gray-700 hover:bg-light-dark hover:dark:bg-secondary-dark">
+                            <button className="bg-primary-light dark:bg-secondary text-black p-2 rounded-lg font-bold border border-gray-300 dark:border-gray-700 hover:bg-light-dark hover:dark:bg-secondary-dark">
                                 <img src="/google.svg" alt="Google" className="w-8" />
                             </button>
-                            <button className="bg-light dark:bg-secondary text-black p-2 rounded-lg font-bold border border-gray-300 dark:border-gray-700 hover:bg-light-dark hover:dark:bg-secondary-dark">
-                                <img src="/github.svg" alt="Github" className="w-8" />
+                            <button className="bg-primary-light dark:bg-secondary text-black p-2 rounded-lg font-bold border border-gray-300 dark:border-gray-700 hover:bg-light-dark hover:dark:bg-secondary-dark">
+                                <img src="/github-dark.svg" alt="Github" className="w-8" />
                             </button>
                         </div>
                     </div>
@@ -30,7 +30,7 @@ const Welcome = () => {
                             Descargar aplicación
                         </span>
                         <div className="flex gap-2 mt-2 justify-center"> 
-                            <button className="bg-light dark:bg-secondary text-black p-2 rounded-lg font-bold border border-gray-300 dark:border-gray-700 hover:bg-light-dark hover:dark:bg-secondary-dark">
+                            <button className="bg-primary-light dark:bg-secondary text-black p-2 rounded-lg font-bold border border-gray-300 dark:border-gray-700 hover:bg-light-dark hover:dark:bg-secondary-dark">
                                 <img src="/utemtrades.svg" alt="Utem Trades" className="w-8" />
                             </button>
                         </div>
