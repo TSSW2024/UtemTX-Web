@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Outlet, useNavigation } from 'react-router-dom';
+import { Link, Outlet, useNavigation, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider';
 import Loading from '../components/Loading';
 import { useMediaQuery } from "@utils/helpers";
@@ -9,7 +9,7 @@ const AppLayout = () => {
     const navigation = useNavigation();
     const isLoading = navigation.state === 'loading';
     const { isAuthenticated, logout, message, error } = useAuth();
-
+    const location = useLocation();
     // Estado para el tema
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
@@ -63,22 +63,21 @@ const AppLayout = () => {
                 </div>
 
                 {/* Botones de inicio de sesión y registro */}
-                <div className={`flex-grow flex gap-2 flex ${isMenuOpen ? ' flex-col hidden' : 'flex-col md:flex-row items-center justify-between'} `}>
-                    {/* Links */}
-                    <ul className={` w-full flex gap-2 ${isMenuOpen ? ' flex-col mb-8' : 'flex-col md:flex-row'}`}>
-                        <li>
-                            <Link to="/buy"
-                                className="px-2 py-1  rounded-lg font-bold hover:bg-primary-lighthover dark:hover:text-primary block md:inline-block bg-primary dark:bg-gray-800 dark:text-gray-200"
-                            >
-                                Comprar Cripto
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/market"
-                                className="px-2 py-1  rounded-lg font-bold hover:bg-primary-lighthover dark:hover:text-primary block md:inline-block bg-primary dark:bg-gray-800 dark:text-gray-200"
-                            >Mercados</Link>
-                        </li>
-                    </ul>
+                <div className={`flex-grow flex gap-2 ${isMenuOpen ? 'flex-col hidden' : 'flex-col md:flex-row items-center justify-center'}`}>
+                <ul className={`w-full flex gap-2 justify-center ${isMenuOpen ? 'flex-col mb-8' : 'flex-col md:flex-row'}`}>
+    <li>
+        <Link to="/buy"
+            className={`px-2 py-1 rounded-lg font-bold  block md:inline-block ${location.pathname === '/buy' ? 'border-b-2 border-white' : ''} bg-transparent text-white`}
+        >
+            Comprar Cripto
+        </Link>
+    </li>
+    <li>
+        <Link to="/market"
+            className={`px-2 py-1 rounded-lg font-bold  block md:inline-block ${location.pathname === '/market' ? 'border-b-2 border-white' : ''} bg-transparent text-white`}
+        >Mercados</Link>
+    </li>
+</ul>
 
                     <div className={`flex gap-4 flex-col md:flex-row items-center ${isMobile ? 'w-max' : 'w-auto'}`}>
 
@@ -103,14 +102,15 @@ const AppLayout = () => {
                             <div className="w-full flex gap-2 items-center">
                                 <Link
                                     to="/profile"
-                                    className={`${isMobile ? 'w-full' : 'w-auto'} flex flex-row gap-2 items-center rounded text-left px-2 py-1 font-bold bg-primary hover:bg-primary-lighthover dark:hover:opacity-75 dark:bg-primary dark:bg-primary-lighthover dark:text-gray-900`}
+                                    className="px-2 py-1 rounded-lg font-bold hover:bg-primary-lighthover dark:hover:text-primary block md:inline-block bg-primary dark:bg-gray-800 dark:text-gray-200"
                                 >
-                                    < i className="fas fa-user" > </i>
+                                    <i className="fas fa-user"></i>
                                     <span className="inline-block">Perfil</span>
                                 </Link>
                                 <button
                                     onClick={logout}
-                                    className={`${isMobile ? 'w-full' : 'w-auto'} flex flex-row gap-2 items-center rounded text-left px-2 py-1 font-bold bg-danger hover:bg-danger-dark dark:text-gray-900`}>
+                                    className="px-2 py-1 rounded-lg font-bold hover:bg-danger-dark block md:inline-block bg-danger dark:text-black dark:hover:text-danger-dark dark:hover:bg-danger dark:bg-danger-dark"
+                                >
                                     <i className="fas fa-sign-out-alt"></i>
                                     <span className="inline-block">Salir</span>
                                 </button>
@@ -119,7 +119,7 @@ const AppLayout = () => {
                         }
                         <div className="flex gap-2">
                             <button onClick={handleClick}
-                                className={`text-left px-2 py-1 bg-primary dark:bg-gray-800 dark:text-gray-200 rounded-lg font-bold hover:text-primary-light dark:hover:text-primary-light ${isMenuOpen ? 'mt-8' : ''}`}
+                                className={`text-left px-2 py-1 bg-primary dark:bg-gray-800 dark:text-gray-200 rounded-lg font-bold hover:text-primary-light dark:hover:text-primary-dark ${isMenuOpen ? 'mt-8' : ''}`}
                             >
                                 <span className={`lg:hidden {isMenuOpen ? 'hidden' : 'block'}`}>
                                     Cambiar tema
