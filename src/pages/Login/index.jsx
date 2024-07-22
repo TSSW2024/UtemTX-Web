@@ -90,39 +90,33 @@ const Login = () => {
                         <label
                             htmlFor="password"
                             className="z-20 w-fit text-left font-bold text-sm absolute top-0 left-0 -mt-2 ml-2 bg-light dark:bg-secondary px-2 text-xs text-gray-700 dark:text-gray-300"
-                        >
-                            Contraseña
-                        </label>
-                        <input
-                            autoComplete="off"
-                            type={showPassword ? 'text' : 'password'}
-                            name="password"
-                            id="password"
-                            className="relative w-full p-2 active:outline-none focus:outline-none rounded-lg bg-transparent border border-gray-600"
-                            value={form.password}
-                            onChange={handleChange}
-                        />
-                        <i className={`absolute top-1/2 transform -translate-y-1/2 right-0 mr-4 cursor-pointer fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}
-                            onClick={() => setShowPassword(!showPassword)}
-                        ></i>
-                    </div>
-
-                    <button type="submit" className="bg-orange-500 dark:bg-primary-light hover:opacity-75 text-black rounded-lg p-2 font-bold">Iniciar sesión</button>
-                    <div className="flex items-center my-4">
-                        <div className="flex-grow border-t border-gray-300"></div>
-                        <span className="mx-4 text-gray-500">o</span>
-                        <div className="flex-grow border-t border-gray-300"></div>
-                    </div>
-                    <Button type="secondary" text="Continuar con Google" imgUrl="/google.svg" onClick={(e) => handleButtonClick(e, 'Google')} />
-                    <Button type="secondary" text="Continuar con Github" imgUrl="/github.svg" onClick={(e) => handleButtonClick(e, 'Github')} />
-                </form>
-                <Link to="/register" className="text-orange-500 font-bold dark:text-primary hover:opacity-75 text-center block mt-4">¿No tienes una cuenta? Regístrate</Link>
-            </>
+                            >
+                                Contraseña
+                            </label>
+                            <input
+                                autoComplete="off"
+                                type={showPassword ? 'text' : 'password'}
+                                name="password"
+                                id="password"
+                                className="relative w-full p-2 active:outline-none focus:outline-none rounded-lg bg-transparent border border-gray-600"
+                                value={form.password}
+                                onChange={handleChange}
+                            />
+                            <i className={`absolute top-1/2 transform -translate-y-1/2 right-0 mr-4 cursor-pointer fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}
+                                onClick={() => setShowPassword(!showPassword)}
+                            ></i>
+                        </div>
+    
+                        <button type="submit" className="bg-orange-500 dark:bg-primary-light hover:opacity-75 text-black rounded-lg p-2 font-bold">Iniciar sesión</button>
+                        
+                    </form>
+                    <Link to="/register" className="text-orange-500 font-bold dark:text-primary hover:opacity-75 text-center block mt-2 mb-0">¿No tienes una cuenta? Regístrate</Link>
+                </>
         )
     }
 
     return (
-        <div className="bg-light dark:bg-secondary p-4 rounded-2xl shadow-xl mx-auto my-8 w-96 h-[40rem]">
+        <div className="bg-light dark:bg-secondary p-4 rounded-2xl shadow-xl mx-auto my-8 w-96 h-auto">
             {loading ? loadingContent() : renderContent()}
         </div >
     );

@@ -1,16 +1,16 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "../../components/Button"; // Asumiendo que tienes un componente Button ya definido
 import { useAuth } from "../../context/AuthProvider";
 import Loading from "../../components/Loading";
+
 const Register = () => {
     const navigate = useNavigate();
     document.title = "Crear una cuenta gratis | Utem Trades";
 
-    const { register, loading, isAuthenticated, error } = useAuth(); // Obtiene la función register desde el contexto
+    const { register, loading, isAuthenticated, error } = useAuth();
     const [form, setForm] = useState({
         email: "",
-        password: "", // Añadido password al estado del formulario
+        password: "",
     });
 
     useEffect(() => {
@@ -38,44 +38,31 @@ const Register = () => {
         });
     };
 
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validar el formulario solo después del envío
         const newErrors = {};
         if (!validateEmail(form.email)) {
             newErrors.email = "Correo electrónico no es válido";
         }
 
-        // Mostrar los errores después del envío
         setErrors(newErrors);
         setIsSubmitted(true);
 
-        // Si hay errores o no se aceptan los términos, no enviar el formulario
         if (Object.keys(newErrors).length > 0 || !termsAccepted) {
             return;
         }
 
         const registrationSuccessful = await register(form);
         if (registrationSuccessful.user !== null) {
-            console.log("Registro exitoso: ", registrationSuccessful);
             const { user } = registrationSuccessful;
             navigate("/verify", { state: { email: user.email, uid: user.uid } });
         }
     };
 
-
     const handleCheckboxChange = (e) => {
         setTermsAccepted(e.target.checked);
         setIsSubmitDisabled(!e.target.checked);
-    };
-
-    const handleButtonClick = (e, provider) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log(provider);
     };
 
     const loadingContent = () => {
@@ -134,10 +121,6 @@ const Register = () => {
                             onChange={handleChange}
                         />
                     </div>
-
-
-
-
                     {isSubmitted && errors.email && (
                         <span className="text-red-500 text-sm">{errors.email}</span>
                     )}
@@ -183,33 +166,14 @@ const Register = () => {
                     >
                         Siguiente
                     </button>
-                    <div className="flex items-center my-4">
-                        <div className="flex-grow border-t border-gray-300"></div>
-                        <span className="mx-4 text-gray-500">o</span>
-                        <div className="flex-grow border-t border-gray-300"></div>
-                    </div>
-                    {/* Botones para continuar con Google o Github */}
-                    <Button
-                        type="secondary"
-                        text="Continuar con Google"
-                        imgUrl="/google.svg"
-                        onClick={(e) => handleButtonClick(e, "Google")}
-                    />
-                    <Button
-                        type="secondary"
-                        text="Continuar con Github"
-                        imgUrl="/github.svg"
-                        onClick={(e) => handleButtonClick(e, "Github")}
-                    />
                 </form>
+                <Link to="/login" className="text-orange-500 font-bold dark:text-primary hover:opacity-75 text-center block mt-2 mb-0">¿Ya tienes una cuenta? Inicia sesión</Link>
             </>
         )
     }
 
-
-
     return (
-        <div className="bg-light dark:bg-secondary h-[45rem] p-4 rounded-2xl shadow-xl mx-auto my-8 w-96">
+        <div className="bg-light dark:bg-secondary h-auto p-4 rounded-2xl shadow-xl mx-auto my-8 w-96">
             {loading && loadingContent()}
             {!loading && error && errorContent()}
             {!loading && !error && renderContent()}
