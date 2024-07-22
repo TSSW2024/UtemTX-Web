@@ -5,100 +5,66 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        // Color de fondo para el modo oscuro
-        dark: '#3D3F3E', 
-
+        dark: '#3D3F3E',
         primary: {
-          // Color principal por defecto
-          DEFAULT: '#E8C8B7', // Color beige claro
-
-          // Color principal al hacer hover
-          hover: '#FCD535', // Color amarillo brillante
-
-          // Color principal en modo oscuro
-          dark: '#F9C74F', // Color dorado
-
-          // Color principal claro
-          light: '#61677A', // Color gris azulado
-
-          // Color principal claro al hacer hover
-          lighthover: '#ff9d5a', // Color naranja claro
+          DEFAULT: '#E8C8B7',
+          hover: '#FCD535',
+          dark: '#F9C74F',
+          light: '#61677A',
+          lighthover: '#ff9d5a',
         },
-        
         secondary: {
-          // Color secundario por defecto
-          DEFAULT: '#0C0D0F', // Color negro profundo
-
-          // Color secundario al hacer hover
-          hover: '#202226', // Color gris oscuro
-
-          // Color secundario en modo oscuro
-          dark: '#1A1D21', // Color gris muy oscuro
-
-          // Color secundario claro
-          light: '#2ecc71', // Color verde brillante
-
-          // Color secundario claro al hacer hover
-          lighthover: '#27ae60', // Color verde más oscuro
+          DEFAULT: '#0C0D0F',
+          hover: '#202226',
+          dark: '#1A1D21',
+          light: '#2ecc71',
+          lighthover: '#27ae60',
         },
-
         danger: {
-          // Color de peligro por defecto
-          DEFAULT: '#e3342f', // Color rojo
-
-          // Color de peligro al hacer hover
-          hover: '#CC312B', // Color rojo más oscuro
-
-          // Color de peligro en modo oscuro
-          dark: '#D64540', // Color rojo menos brillante
+          DEFAULT: '#e3342f',
+          hover: '#CC312B',
+          dark: '#D64540',
         },
-
         light: {
-          // Color claro por defecto
-          DEFAULT: '#FFF6E0', // Color crema
-
-          // Color claro en modo oscuro
-          dark: '#E5E5E5', // Color gris claro
-
-          // Color claro secundario
-          secondary: '#F4F0EA', // Color blanco sucio
+          DEFAULT: '#FFF6E0',
+          dark: '#E5E5E5',
+          secondary: '#F4F0EA',
         },
-
-        // Color para elementos deshabilitados
-        disabled: '#BDBDBD', // Color gris medio
+        disabled: '#BDBDBD',
       },
-
       colors: {
         primary: {
-          // Color principal por defecto
-          DEFAULT: '#ffed4a', // Color amarillo
-
-          // Color principal al hacer hover
-          hover: '#FCD535', // Color amarillo brillante
-
-          // Color principal en modo oscuro
-          dark: '#F9C74F', // Color dorado
-
-          // Color principal claro
-          light: '#f97316', // Color naranja
+          DEFAULT: '#ffed4a',
+          hover: '#FCD535',
+          dark: '#F9C74F',
+          light: '#f97316',
         },
-
-        // Color secundario
-        secondary: '#2B3139', // Color gris oscuro
-
-        // Color de peligro
-        danger: '#e3342f', // Color rojo
+        secondary: '#2B3139',
+        danger: '#e3342f',
       },
-
       listStyleType: {
-        // Lista con viñetas cuadradas
         square: 'square',
-
-        // Lista con numeración romana en mayúsculas
         roman: 'upper-roman',
-
-        // Lista con letras minúsculas
         alpha: 'lower-alpha',
+      },
+      keyframes: {
+        'carrusel-spin': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' }
+        },
+        'fade-in': {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 }
+        },
+        'fade-out': {
+          '0%': { opacity: 1 },
+          '100%': { opacity: 0 }
+        }
+      },
+      animation: {
+        'carrusel-spin': 'carrusel-spin 6s linear infinite',
+        'fade-in': 'fade-in 1s ease-in-out',
+        'fade-out': 'fade-out 1s ease-in-out'
       },
     },
   },

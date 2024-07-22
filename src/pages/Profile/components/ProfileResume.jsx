@@ -25,9 +25,6 @@ const ProfileResume = ({ user }) => {
             <div className="flex flex-col md:flex-row flex-wrap gap-10 mt-4 md:mt-0">
                 <Name name={name} verified={verified} />
                 <Uid uid={uid} />
-                <Role role={role} />
-                <Followed following={following} />
-                <Followers followers={followers} />
             </div>
         </div>
     );

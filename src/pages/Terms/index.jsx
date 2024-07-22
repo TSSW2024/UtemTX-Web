@@ -1,57 +1,81 @@
 import React from 'react';
 
 const Terms = () => {
-    document.title = 'Condiciones de Uso de Utem Trades';
+    document.title = 'Términos y Condiciones para UtemTX';
     const dateUpdate = new Date("2024-06-03 06:59");
+
     return (
-        <div>
-            <h1 className="text-3xl font-bold text-left pb-2">Condiciones de Uso de <span className="text-orange-500 dark:text-primary">Utem Trades</span></h1>
-            <h2>Última actualización: {dateUpdate.toLocaleDateString(
-                'es-ES', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-            }
-            )}</h2>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <h1 className="text-3xl font-bold text-left pb-2">Términos y Condiciones para <span className="text-orange-500 dark:text-primary"> UtemTX</span></h1>
+            <h2 className="text-lg">Última actualización: {dateUpdate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</h2>
             <p className="mt-8 text-left text-lg">
-                Estas Condiciones de Uso de Utem Trades se establecen entre usted (en adelante, "usted" o "su") y los operadores
-                de Utem Trades (tal como se define a continuación) y rigen el uso de los sitios web, aplicaciones móviles y otros
-                servicios ofrecidos por Utem Trades. Al utilizar los Servicios, usted acepta estas Condiciones de Uso y nuestra
-                Política de Privacidad. Si no está de acuerdo con estas Condiciones de Uso o nuestra Política de Privacidad, no
-                debe utilizar los Servicios.
+                Al hacer clic en el botón "Registrarse", usted acepta los siguientes términos y condiciones:
             </p>
-            <p className="mt-8 text-left text-lg">
-                Utem Trades se reserva el derecho de modificar estas Condiciones de Uso en cualquier momento y sin previo aviso.
-                Cualquier modificación entrará en vigencia inmediatamente después de su publicación en los Servicios. Es su
-                responsabilidad revisar periódicamente estas Condiciones de Uso para estar al tanto de las modificaciones. El
-                uso continuado de los Servicios después de la publicación de modificaciones constituirá su aceptación de dichas
-                modificaciones.
-            </p>
-            <p className="mt-8 text-left text-lg">
-                Utem Trades se compromete a proteger su privacidad y a cumplir con las leyes y regulaciones aplicables en materia
-                de protección de datos. Nuestra Política de Privacidad describe cómo recopilamos, utilizamos y compartimos su
-                información personal cuando utiliza nuestros Servicios. Al utilizar los Servicios, usted acepta nuestra Política
-                de Privacidad y nos autoriza a recopilar, utilizar y compartir su información personal de acuerdo con dicha
-                política.
-            </p>
-            <p className="mt-8 text-left text-lg">
-                Utem Trades se esfuerza por proporcionar información precisa y actualizada en los Servicios. Sin embargo, no
-                garantizamos la exactitud, integridad o actualidad de la información proporcionada. El uso de la información
-                proporcionada en los Servicios es bajo su propio riesgo. Utem Trades no será responsable de ninguna pérdida o
-                daño derivado del uso de la información proporcionada en los Servicios.
-            </p>
-            <p className="mt-8 text-left text-lg">
-                Utem Trades se reserva el derecho de suspender o cancelar su acceso a los Servicios en cualquier momento y por
-                cualquier motivo, sin previo aviso. Usted acepta que Utem Trades no será responsable ante usted ni ante ningún
-                tercero por cualquier suspensión o cancelación de su acceso a los Servicios.
-            </p>
-            <ol className="mt-8 text-left text-lg list-alpha px-8">
-                <li>Elemento falso 1</li>
-                <li>Elemento falso 2</li>
-                <li>Elemento falso 3</li>
+            <ol className="mt-4 text-left text-lg list-decimal px-8">
+                <li>
+                    <strong>Exactitud de la Información</strong><br />
+                    Usted es responsable de la precisión de la información proporcionada durante el registro y en cualquier momento posterior. Toda la información debe ser veraz y estar actualizada.
+                </li>
+                <li>
+                    <strong>Uso de Información Personal</strong><br />
+                    Su información personal se utilizará de acuerdo con nuestra Política de Privacidad. No compartiremos su información con terceros sin su consentimiento previo, salvo cuando lo exija la ley.
+                </li>
+                <li>
+                    <strong>Seguridad de la Cuenta</strong><br />
+                    Usted es responsable de mantener la seguridad de su cuenta, incluyendo la protección de su contraseña y cualquier otra información de acceso. Notifique inmediatamente a UtemTX si sospecha de cualquier actividad no autorizada en su cuenta.
+                </li>
+                <li>
+                    <strong>Responsabilidad de Uso</strong><br />
+                    Usted se compromete a utilizar la plataforma de manera legal y ética. Cualquier uso indebido, como actividades fraudulentas o ilícitas, resultará en la suspensión o terminación de su cuenta.
+                </li>
+                <li>
+                    <strong>Cumplimiento Legal</strong><br />
+                    Usted debe cumplir con todas las leyes y regulaciones aplicables en su jurisdicción al usar nuestra plataforma. Es su responsabilidad asegurarse de que su uso de los servicios de UtemTX sea legal en su país.
+                </li>
+                <li>
+                    <strong>Modificaciones</strong><br />
+                    UtemTX puede modificar estos términos y condiciones en cualquier momento. Le notificaremos de cualquier cambio a través de nuestra plataforma o por correo electrónico. Su uso continuado de la plataforma después de dichos cambios constituirá su aceptación de los nuevos términos.
+                </li>
+                <li>
+                    <strong>Limitación de Responsabilidad</strong><br />
+                    UtemTX no será responsable por cualquier pérdida o daño que resulte del uso de nuestra plataforma, incluidos pero no limitados a pérdidas financieras, daños indirectos o cualquier otra pérdida resultante de la negligencia o incumplimiento por parte del usuario.
+                </li>
+                <li>
+                    <strong>Terminación de Servicio</strong><br />
+                    UtemTX se reserva el derecho de suspender o terminar su acceso a la plataforma en cualquier momento y por cualquier motivo, sin previo aviso.
+                </li>
+                <li>
+                    <strong>Transacciones Financieras</strong><br />
+                    Al utilizar UtemTX, usted puede realizar transacciones financieras que incluyen la compra, venta, intercambio o almacenamiento de criptomonedas. UtemTX no garantiza la precisión de los precios ni la ejecución inmediata de las órdenes. Todas las transacciones son finales y no reembolsables.
+                </li>
+                <li>
+                    <strong>Riesgos Asociados</strong><br />
+                    Usted entiende y acepta que la compra, venta y el comercio de criptomonedas conllevan riesgos significativos. Las criptomonedas son volátiles y pueden experimentar fluctuaciones de precio importantes. Usted es responsable de todas las pérdidas resultantes de sus actividades de inversión y comercio.
+                </li>
+                <li>
+                    <strong>Comisiones y Tarifas</strong><br />
+                    UtemTX puede cobrar comisiones y tarifas por el uso de sus servicios. Estas tarifas pueden variar según el tipo de transacción y se detallarán en nuestra plataforma. Usted acepta pagar todas las tarifas aplicables.
+                </li>
+                <li>
+                    <strong>No Asesoramiento Financiero</strong><br />
+                    UtemTX no ofrece asesoramiento financiero, legal o de inversión. Toda la información proporcionada en la plataforma es solo para fines informativos. Usted debe realizar su propia investigación y consultar con asesores financieros antes de tomar decisiones de inversión.
+                </li>
+                <li>
+                    <strong>Cumplimiento de AML/KYC</strong><br />
+                    Para cumplir con las leyes y regulaciones de prevención de lavado de dinero (AML) y de conocimiento del cliente (KYC), UtemTX puede solicitar información adicional para verificar su identidad y la fuente de sus fondos. Usted se compromete a proporcionar información precisa y completa cuando sea solicitada.
+                </li>
+                <li>
+                    <strong>Sin Seguro</strong><br />
+                    No somos un banco u otra institución depositaria. Su cuenta y activos en UtemTX no están asegurados contra pérdidas.
+                </li>
+                <li>
+                    <strong>Resolución de Disputas</strong><br />
+                    Esperamos evitar disputas, pero si hay una disputa, usted está obligado a arbitrar disputas con nosotros y la forma en que puede buscar reparación puede ser limitada.
+                </li>
             </ol>
+            <p className="mt-8 text-left text-lg">
+                Gracias por elegir UtemTX.
+            </p>
         </div>
     );
 }

@@ -16,10 +16,6 @@ const Dashboard = ({ user }) => {
             <ProfileResume user={user} />
             <Wallet wallet={mockupWallet} />
             <Markets />
-            <div className=" flex flex-row flex-wrap justify-between gap-4">
-                <SocialConnect users={mockupUsers} />
-                <Noticias noticias={mockupNoticias} />
-            </div>
         </div >
     );
 

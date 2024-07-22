@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthProvider.jsx';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ const HomeAuth = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div className="flex flex-col min-h-screen bg-gray-100 dark:bg-dark">
             <div className="flex-grow flex flex-col items-center justify-center gap-8 p-4 sm:p-8">
                 <div className="p-4 sm:p-8 flex flex-col gap-8 bg-white dark:bg-gray-800 shadow-lg rounded-lg w-full max-w-4xl">
                     <div className="flex flex-col items-center gap-4">

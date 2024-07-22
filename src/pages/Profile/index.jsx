@@ -20,14 +20,10 @@ const Profile = () => {
 
     const renderSection = () => {
         switch (activeSection) {
-            case "perfil":
-                return <Perfil />;
             case "dashboard":
                 return <Dashboard user={user} />;
             case "configuracion":
                 return <Configuracion />;
-            case "contactos":
-                return <Contactos />;
             default:
                 return <Dashboard user={user} />;
         }
@@ -57,15 +53,6 @@ const Profile = () => {
             <div className={` lg:static fixed inset-y-0 left-0 transform ${isMenuOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 ease-in-out lg:translate-x-0 z-50 `}>
                 <ul className="flex flex-col text-sm font-medium text-left text-gray-500 dark:text-gray-400 h-full p-4 lg:p-0 lg:relative lg:h-auto">
                     <li className="mb-2">
-                        <a
-                            href="#"
-                            className={`inline-flex items-center justify-start p-4 border-l-2 transition-colors duration-200 ${activeSection === "perfil" ? " border-orange-500 dark:text-orange-500" : "border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                                } rounded-l-lg group`}
-                            onClick={() => { setActiveSection("perfil"); setIsMenuOpen(false); }}
-                        >
-                            <i className={`fas fa-user-circle fa-fw ${iconClass("perfil")}`} aria-hidden="true"></i>
-                            <span className="ml-2">Perfil</span>
-                        </a>
                     </li>
                     <li className="mb-2">
                         <a
@@ -96,8 +83,6 @@ const Profile = () => {
                                 } rounded-l-lg group`}
                             onClick={() => { setActiveSection("contactos"); setIsMenuOpen(false); }}
                         >
-                            <i className={`fas fa-address-book fa-fw ${iconClass("contactos")}`} aria-hidden="true"></i>
-                            <span className="ml-2">Contactos</span>
                         </a>
                     </li>
                 </ul>

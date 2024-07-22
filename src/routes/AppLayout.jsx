@@ -3,13 +3,14 @@ import { Link, Outlet, useNavigation, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider';
 import Loading from '../components/Loading';
 import { useMediaQuery } from "@utils/helpers";
-
+import LootBox from '../pages/Loot/Loot.jsx';
 
 const AppLayout = () => {
     const navigation = useNavigation();
     const isLoading = navigation.state === 'loading';
     const { isAuthenticated, logout, message, error } = useAuth();
     const location = useLocation();
+    const [showLootBox, setShowLootBox] = useState(false);
     // Estado para el tema
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
@@ -65,19 +66,24 @@ const AppLayout = () => {
                 {/* Botones de inicio de sesión y registro */}
                 <div className={`flex-grow flex gap-2 ${isMenuOpen ? 'flex-col hidden' : 'flex-col md:flex-row items-center justify-center'}`}>
                 <ul className={`w-full flex gap-2 justify-center ${isMenuOpen ? 'flex-col mb-8' : 'flex-col md:flex-row'}`}>
-    <li>
-        <Link to="/buy"
-            className={`px-2 py-1 rounded-lg font-bold  block md:inline-block ${location.pathname === '/buy' ? 'border-b-2 border-white' : ''} bg-transparent text-white`}
-        >
-            Comprar Cripto
-        </Link>
-    </li>
-    <li>
-        <Link to="/market"
-            className={`px-2 py-1 rounded-lg font-bold  block md:inline-block ${location.pathname === '/market' ? 'border-b-2 border-white' : ''} bg-transparent text-white`}
-        >Mercados</Link>
-    </li>
-</ul>
+                            <li>
+                                <Link to="/buy"
+                                    className={`px-2 py-1 rounded-lg font-bold  block md:inline-block ${location.pathname === '/buy' ? 'border-b-2 border-white' : ''} bg-transparent text-white`}
+                                >
+                                    Comprar Cripto
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/market"
+                                    className={`px-2 py-1 rounded-lg font-bold  block md:inline-block ${location.pathname === '/market' ? 'border-b-2 border-white' : ''} bg-transparent text-white`}
+                                >Mercados</Link>
+                            </li>
+                            <li>
+                            <Link to="/lootbox"
+                                className={`px-2 py-1 rounded-lg font-bold block md:inline-block ${location.pathname === '/lootbox' ? 'border-b-2 border-white' : ''} bg-transparent text-white`}
+                            >Cajas de Botín</Link>
+                        </li>
+                        </ul>
 
                     <div className={`flex gap-4 flex-col md:flex-row items-center ${isMobile ? 'w-max' : 'w-auto'}`}>
 

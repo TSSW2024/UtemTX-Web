@@ -17,6 +17,7 @@ import Verify from '../pages/Verify';
 import Privacy from '../pages/Privacy';
 import Terms from '../pages/Terms';
 import NotFound from '../pages/NotFound';
+import LootBox from '../pages/Loot/Loot';
 
 const router = createBrowserRouter([
     {
@@ -35,7 +36,8 @@ const router = createBrowserRouter([
             { path: '/market', element: <Market /> },
             { path: '/market/:symbol', element: <MarketDetails /> },
             { path: '/buy', element: <Buy /> },
-            { path: '/profile', element: <Profile /> }
+            { path: '/profile', element: <Profile /> },
+            { path: '/lootbox', element: <LootBox /> },
         ]
     }
 ]);
