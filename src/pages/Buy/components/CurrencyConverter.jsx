@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import DropdownSearch from '@components/DropdownSearch';
-import criptosMockup from '@mockups/criptos';
 import { Tooltip } from 'react-tooltip';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthProvider';
+import { useCryptoConversion } from '../../../hooks/useCryptoConversion';
+import DropdownSearch from '@components/DropdownSearch';
 
-const CurrencyConverter = ({ mode, isLogged = false }) => {
+const CurrencyConverter = ({ criptos, mode, isLogged = false }) => {
     const navigate = useNavigate();
-    const { criptos, divisas } = criptosMockup;
     const { user } = useAuth();
+    const { convertCryptoToCLP, convertCLPToCrypto, error } = useCryptoConversion();
 
-    const fromOptions = mode === 'buy' ? divisas : criptos;
-    const toOptions = mode === 'buy' ? criptos : divisas;
+    const defaultOptions = [{ name: 'CLP' }];
+    const fromOptions = mode === 'buy' ? defaultOptions : criptos;
+    const toOptions = mode === 'buy' ? criptos : defaultOptions;
 
-    const [fromCurrency, setFromCurrency] = useState(fromOptions[0].symbol);
-    const [toCurrency, setToCurrency] = useState(toOptions[0].symbol);
+    const [fromCurrency, setFromCurrency] = useState(fromOptions[0]?.name || 'CLP');
+    const [toCurrency, setToCurrency] = useState(toOptions[0]?.name || 'CLP');
     const [amount, setAmount] = useState('');
     const [convertedAmount, setConvertedAmount] = useState('');
     const [inputFocused, setInputFocused] = useState(false);
 
     useEffect(() => {
-        setFromCurrency(fromOptions[0].symbol);
-        setToCurrency(toOptions[0].symbol);
-    }, [mode]);
+        if (fromOptions.length > 0) {
+            setFromCurrency(fromOptions[0]?.name || 'CLP');
+        }
+        if (toOptions.length > 0) {
+            setToCurrency(toOptions[0]?.name || 'CLP');
+        }
+    }, [mode, fromOptions, toOptions]);
 
     useEffect(() => {
         if (amount && fromCurrency && toCurrency) {
@@ -33,29 +38,15 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
     const convertCurrency = async () => {
         if (!amount) return;
 
-        const apiUrl = 'https://api-convertir.tssw.cl/convert';
-
         try {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    amount: amount,
-                    from: fromCurrency,
-                    to: toCurrency,
-                }),
-            });
-
-            if (!response.ok) {
-                const errorResponse = await response.json();
-                console.error('Error en la respuesta de la API:', errorResponse);
-                throw new Error(`Error: ${errorResponse.message || response.statusText}`);
+            const numericAmount = parseFloat(amount);
+            let result;
+            if (mode === 'buy') {
+                result = await convertCLPToCrypto(`${toCurrency}USDT`, numericAmount);
+            } else {
+                result = await convertCryptoToCLP(`${fromCurrency}USDT`, numericAmount);
             }
-
-            const data = await response.json();
-            setConvertedAmount(data.result.toFixed(8).slice(0, 16));
+            setConvertedAmount(Math.floor(result)); // Redondear a entero
         } catch (error) {
             console.error('Error al obtener la conversión:', error);
         }
@@ -90,7 +81,6 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
             const responseText = await response.text();
             console.log('Respuesta de la API:', responseText);
 
-            // Intenta analizar la respuesta como JSON
             let data;
             try {
                 data = JSON.parse(responseText);
@@ -106,11 +96,11 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
 
             console.log('Resultado de WebPay:', data);
             window.location.href = 'https://backend-webpay.tssw.cl/';
-            // Aquí podrías manejar el resultado de la conversión
         } catch (error) {
             console.error('Error en WebPay:', error);
         }
     };
+
     const tooltipContent = () => {
         if (convertedAmount === '' || amount === '') return;
 
@@ -132,7 +122,6 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
         const inputVal = e.target.value;
         if (/^\d*\.?\d{0,8}$/.test(inputVal)) {
             setAmount(inputVal);
-            // Llamar a convertCurrency() cada vez que el usuario ingrese un nuevo número
             await convertCurrency();
         }
     };
@@ -140,7 +129,7 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
     const handleClick = async () => {
         if (isLogged) {
             try {
-                await webPay(amount);
+                await webPay(convertedAmount);
                 alert(`¡${mode === 'buy' ? 'Compra' : 'Venta'} exitosa!`);
             } catch (error) {
                 console.error('Error en WebPay:', error);
@@ -205,7 +194,7 @@ const CurrencyConverter = ({ mode, isLogged = false }) => {
                 {
                     isLogged ?
                         mode === 'buy' ? 'Comprar' : 'Vender'
-                        : 'Iniciar sesión/Registrarse '
+                        : 'Inicia sesión para continuar'
                 }
             </button>
         </div>

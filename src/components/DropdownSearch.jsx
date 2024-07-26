@@ -22,7 +22,7 @@ const DropdownSearch = ({ options, selectedOption, onSelect, disabled = false })
 
         const filtered = options.filter(option =>
             option.name.toLowerCase().includes(value) ||
-            option.symbol.toLowerCase().includes(value)
+            option.name.toLowerCase().includes(value)
         );
         setFilteredOptions(filtered);
     };
@@ -48,10 +48,10 @@ const DropdownSearch = ({ options, selectedOption, onSelect, disabled = false })
     const handleOptionClick = (option) => {
         setIsOpen(false);
         setInputValue('');
-        onSelect(option.symbol); // Enviamos el símbolo de la opción seleccionada
+        onSelect(option.name);
     };
 
-    const selectedOptionData = options.find(option => option.symbol === selectedOption);
+    const selectedOptionData = options.find(option => option.name === selectedOption);
 
     return (
         <div className="relative z-1">
@@ -97,11 +97,11 @@ const DropdownSearch = ({ options, selectedOption, onSelect, disabled = false })
                     <ul className="w-40">
                         {filteredOptions.map((option) => (
                             <li
-                                key={option.symbol}
-                                className={`flex items-center p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 gap-4 ${option.symbol === selectedOption ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
+                                key={option.name}
+                                className={`flex items-center p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 gap-4 ${option.name === selectedOption ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
                                 onClick={() => handleOptionClick(option)}
                                 role="option"
-                                aria-selected={option.symbol === selectedOption}
+                                aria-selected={option.name === selectedOption}
                             >
                                 <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600">
                                     <img
@@ -116,7 +116,7 @@ const DropdownSearch = ({ options, selectedOption, onSelect, disabled = false })
                                         }
                                     />
                                 </div>
-                                <span>{option.symbol}</span>
+                                <span>{option.name}</span>
                             </li>
                         ))}
                     </ul>

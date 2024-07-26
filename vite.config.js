@@ -14,6 +14,7 @@ export default defineConfig({
       '@mockups': path.resolve(__dirname, './src/mockups'),
       '@public': path.resolve(__dirname, './public'),
       '@assets': path.resolve(__dirname, './src/assets'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
     }
   }
 })
